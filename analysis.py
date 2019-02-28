@@ -13,10 +13,17 @@ def position_analysis(position_items):
     # dataframe ?
     df = pd.DataFrame.from_dict(json_normalize(position_items), orient='columns')
 
-    res['total_book_value'] = float(df['book_value'].sum())
-    print res['total_book_value']
-    res['total_profit'] = 0.1
-    res['total_notional_amount'] = 0.1
-    res['total_eval'] = 0.1
+    loan = dict()
+    loan['amount'] = 20000
+    rent = dict()
+    rent['deposit'] = 20000
+
+    res['book_value'] = float(df['book_value'].sum())
+    res['loan'] = loan
+    res['rent'] = rent
+
+    res['result_date'] = '2018-10-11'
+    res['profit_percent'] = 0.2
+    res['profit_amount'] = 0.2
 
     return res

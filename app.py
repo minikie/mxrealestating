@@ -1,41 +1,26 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, jsonify
-from sqlalchemy import create_engine, Integer, Column, String, Text, Sequence
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-import json
-import models
+from flask import request, render_template, jsonify, send_from_directory
+from flask import Flask, url_for, redirect, session
+import os, json, datetime
+from module.database import db_session, init_db
+from module.models import Position
 from analysis import position_analysis
-from utilities import gen_key
+from utilities import gen_key, invalid_request
 
 app = Flask(__name__)
+app.secret_key = 'sample_secreat_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
-engine = create_engine('sqlite:///students.sqlite3', echo=True)
-Base = declarative_base()
-Session = sessionmaker(bind=engine)
 
-class Position(Base):
-    __tablename__ = 'users'
-    key = Column(String(50), primary_key=True)
-    email = Column(String(50))
-    positions = Column(Text)
-    results = Column(Text)
-
-    def __init__(self, key, email, positions):
-        self.key = key
-        self.email = email
-        self.positions = positions
-        self.results = None
-
+init_db()
 
 @app.route('/')
 def index():
-   return '<html><body><h1>Hello World</h1></body></html>'
+    return render_template('index.html')
 
 
 @app.route('/test')
 def test_db():
-    Session.add(Position('name','city','addr'))
+    db_session.add(Position('name','city','addr'))
     return 'success'
 
 
@@ -47,91 +32,125 @@ def load_info(keyname):
 
 
 # ajax call
-@app.route('/analysis')
+@app.route('/analysis', methods=['POST'])
 def analysis():
-    post_data=dict()
+    # post
+    request_json = request.json
 
-    #position_items = post_data['position_items']
-    position_items = [
-        {
-            'name': '수정동1',
-            'address': '경기도 어쩌구',
-            'location_x': 10.222,
-            'location_y': 25.241,
-            'book_value' : 1000,
-            'book_date': '2018-10-11',
-            'position_type' : 'owner_occupied',
-            'loan' : {
-              'notional' : 10000,
-              'loan_type': 0.012,
-              'loan_rate' : 0.012,
-              'maturity' : 2020-10-11
-          },
-            'rent': {
-              'deposit': {
-                  'amount': 10000,
-              },
-              'payment': {
-                  'frequency': 'monthly',
-                  'amount': 1000
-              },
-              'start_date' : '2020-10-11',
-              'maturity_date': '2020-10-11'
-          },
-        },
-        {
-            'name': '수정동2',
-            'address': '경기도 어쩌구',
-            'location_x': 10.222,
-            'location_y': 25.241,
-            'book_value' : 1000,
-            'book_date': '2018-10-11',
-            'position_type' : 'owner_occupied',
-            'loan' : {
-              'notional' : 10000,
-              'loan_type': 0.012,
-              'loan_rate' : 0.012,
-              'maturity' : 2020-10-11
-          },
-            'rent': {
-              'deposit': {
-                  'amount': 10000,
-              },
-              'payment': {
-                  'frequency': 'monthly',
-                  'amount': 1000
-              },
-              'start_date' : '2020-10-11',
-              'maturity_date': '2020-10-11'
-          },
-        },
-    ]
+    position_items = request_json['position_list']
+
+    # position_items = [
+    #     {
+    #         'name': '수정동1',
+    #         'address': '경기도 어쩌구',
+    #         'location_x': 10.222,
+    #         'location_y': 25.241,
+    #         'book_value' : 1000,
+    #         'book_date': '2018-10-11',
+    #         'position_type' : 'owner_occupied',
+    #         'loan' : {
+    #           'notional' : 10000,
+    #           'loan_type': 0.012,
+    #           'loan_rate' : 0.012,
+    #           'maturity' : 2020-10-11
+    #       },
+    #         'rent': {
+    #           'deposit': {
+    #               'amount': 10000,
+    #           },
+    #           'payment': {
+    #               'frequency': 'monthly',
+    #               'amount': 1000
+    #           },
+    #           'start_date' : '2020-10-11',
+    #           'maturity_date': '2020-10-11'
+    #       },
+    #     },
+    #     {
+    #         'name': '수정동2',
+    #         'address': '경기도 어쩌구',
+    #         'location_x': 10.222,
+    #         'location_y': 25.241,
+    #         'book_value' : 1000,
+    #         'book_date': '2018-10-11',
+    #         'position_type' : 'owner_occupied',
+    #         'loan' : {
+    #           'notional' : 10000,
+    #           'loan_type': 0.012,
+    #           'loan_rate' : 0.012,
+    #           'maturity' : 2020-10-11
+    #       },
+    #         'rent': {
+    #           'deposit': {
+    #               'amount': 10000,
+    #           },
+    #           'payment': {
+    #               'frequency': 'monthly',
+    #               'amount': 1000
+    #           },
+    #           'start_date' : '2020-10-11',
+    #           'maturity_date': '2020-10-11'
+    #       },
+    #     },
+    # ]
 
     res = position_analysis(position_items)
 
     return jsonify(res)
 
 
-@app.route('/storepositions')
+@app.route('/storepositions', methods=['POST'])
 def store_positions():
     # post
-    post_data = dict()
+    request_json = request.json
 
-    email = post_data['email']
-    key = gen_key(email)
-    positions = post_data['positions']
-    p = Position(key, email, positions)
+    email = request_json['email']
+    positions = request_json['positions']
+    key = gen_key(email, positions)
+    #p = Position(key, email, positions)
 
-    exist = True
+    p = Position.query.filter(Position.email == email).first()
 
-    if exist:
-        db.session.delete(p)
+    if p is None:
+        p = Position(key, email, str(positions))
+        db_session.add(p)
+    else:
+        p.positions = str(positions)
+        p.key = key
 
-    db.session.add(p)
+    db_session.commit()
 
-    return key
+    res = dict()
+    res['access_key'] = key
+    timestamp = str(datetime.datetime.utcnow())
+    res['timestamp'] = timestamp
+    res['message'] = 'success'
+
+    return jsonify(res)
+
+
+@app.route('/robots.txt')
+def robot_to_root():
+    return send_from_directory(app.static_folder, request.path[1:])
+
+@app.route('/sitemap.xml')
+def sitemap_to_root():
+    return send_from_directory(app.static_folder, request.path[1:])
+
+@app.route('/google45f2d19c6c554811.html')
+def google_site_confirm():
+    return send_from_directory(app.static_folder, request.path[1:])
+
+
+@app.route('/naverac258554f02766a1a31c7f19cf6c4ae2.html')
+def naver_site_confirm():
+    return send_from_directory(app.static_folder, request.path[1:])
+
+@app.route('/downloads/<path:filename>', methods=['GET'])
+def downlaod_file(filename):
+    download_path = os.path.join('./downloads')
+    return send_from_directory(download_path, filename=filename)
 
 
 if __name__ == '__main__':
-   db.create_all()
    app.run(debug = True)
