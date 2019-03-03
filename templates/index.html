@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <meta charset="UTF-8">
@@ -31,29 +31,66 @@
         <!--&lt;!&ndash; /.container &ndash;&gt;-->
     <!--</nav>-->
 
-    <section class="text-center">
-        <form id="positionInfo" >
+    <section id="positionInfo" class="text-center">
+        <form>
           <div class="form-group">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">이름</span>
+                        </div>
+                        <input type="number" class="form-control" id="amount" name="amount" placeholder="금액 입력">
+                        <div class="input-group-append">
+                            <span class="input-group-text">만원</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">건물시가표준액</span>
+                    </div>
+                        <input type="number" class="form-control" id="price" name="price" placeholder="금액 입력">
+                        <div class="input-group-append">
+                            <span class="input-group-text">만원</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button id="submit" type="button" onClick="return doTran('register');" class="btn btn-primary">
+                        <i class="fas fa-calculator"></i> 등기비용 계산
+                    </button>
+                </div>
+            </div>
+
             <label for="positionInfoInputNotional">Notional Amount</label>
             <input type="number" v-model="notional" min="0" placeholder="Notional" class="form-control" id="positionInfoInputNotional" >
+            <label for="positionInfoInputName">Name</label>
+            <input type="text" v-model="name" min="0" placeholder="Name" class="form-control" id="positionInfoInputName"
+                   @input="nameChangeHandler" >
             <label for="positionInfoInputEffectiveDate">Effective Date</label>
             <input type="date" v-model="effective_date" min="1950-01-01" placeholder="Effective Date" class="form-control" id="positionInfoInputEffectiveDate" >
           </div>
         </form>
         <div class="row">
             <div class="col-sm-12 text-center">
-                <button id="addbtn" class="btn btn-primary btn-md center-block" Style="width: 100px;" OnClick="addbtn_Click()" >Add</button>
-                <button id="editbtn" class="btn btn-primary btn-md center-block" Style="width: 100px;" OnClick="editbtn_Click()" >Edit</button>
+                <button id="addbtn" class="btn btn-primary btn-md center-block" v-bind:class="{ 'disabled': isAddDisabled }"
+                        :disabled='isAddDisabled'
+                        Style="width: 100px;" OnClick="addbtn_Click()" >Add</button>
+                <button id="editbtn" class="btn btn-primary btn-md center-block" v-bind:class="{ 'disabled': isEditDisabled }"
+                        :disabled='isEditDisabled'
+                        Style="width: 100px;" OnClick="editbtn_Click()" >Edit</button>
              </div>
         </div>
 
     </section>
     <hr>
     <section class="text-center">
-        <div id="positionList">
-            <ul>
-              <li v-for="position in position_list"><strong>[[ position.notional ]]</strong> </li>
-            </ul>
+        <div id="positionList" class="list-group">
+          <a href="#" class="list-group-item list-group-item-action" v-for="position in position_list"
+             v-bind:class="{ 'active': selected==position.name}" @click="selected = position.name"
+             ><strong >[[ position.name ]] [[ position.notional ]]</strong> </a>
         </div>
     </section>
 

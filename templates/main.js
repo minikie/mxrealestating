@@ -1,17 +1,10 @@
 var this_delimiters = ['[[',']]'];
 
-var app = new Vue({
-  el: '#message',
-  data: {
-    message : 'Hello Vue!'
-  },
-  delimiters: this_delimiters
-})
-
 var positionInfo_app = new Vue({
   el: '#positionInfo',
   data: {
     name: undefined,
+    address: undefined,
     position_type: 'owner_occupied',
     notional: undefined,
     book_value: undefined,
