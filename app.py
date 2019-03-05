@@ -6,10 +6,14 @@ from module.database import db_session, init_db
 from module.models import Position
 from analysis import position_analysis
 from utilities import gen_key, invalid_request
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.secret_key = 'sample_secreat_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
+
+# enable CORS
+CORS(app)
 
 init_db()
 
@@ -105,26 +109,29 @@ def store_positions():
     request_json = request.json
 
     email = request_json['email']
-    positions = request_json['positions']
-    key = gen_key(email, positions)
+    position_list = request_json['position_list']
+    key = gen_key(email, position_list)
     #p = Position(key, email, positions)
 
     p = Position.query.filter(Position.email == email).first()
 
     if p is None:
-        p = Position(key, email, str(positions))
+        p = Position(key, email, str(position_list))
         db_session.add(p)
     else:
-        p.positions = str(positions)
+        p.positions = str(position_list)
         p.key = key
 
     db_session.commit()
 
     res = dict()
-    res['access_key'] = key
+    # res['access_key'] = key
     timestamp = str(datetime.datetime.utcnow())
     res['timestamp'] = timestamp
     res['message'] = 'success'
+    
+    # email 보냄
+
 
     return jsonify(res)
 
