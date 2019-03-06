@@ -1,13 +1,25 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 import datetime
+from dateutil.relativedelta import relativedelta
 from pandas.io.json import json_normalize
-
+from utilities import CF_Row
 
 class PositionItem:
     def __init__(self, **args):
         self.name = args['name']
         self.address = args['address']
+        self.maturity_date = args['maturity_date']
+
+    def get_cashflow(self, report_date):
+        cashflows = []
+        roop_date = report_date.date()
+        while (roop_date <= self.maturity_date ):
+            roop_date = roop_date + relativedelta(months=1)
+            d_str = roop_date.strftime('%Y-%m-%d')
+            cashflows.append(CF_Row(d_str, ))
+
+
 
 
 def position_analysis(position_items):

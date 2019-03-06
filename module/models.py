@@ -8,25 +8,19 @@ class Position(Base):
     email = Column(String(120), unique=True)
     positions = Column(Text)
     results = Column(Text)
+    timestamp = Column(String(30))
 
     def __repr__(self):
         return '<Position %r>' % (self.email)
 
-    def __init__(self, key, email, positions):
+    def __init__(self, key, email, positions, timestamp):
         self.key = key
         self.email = email
         self.positions = positions
         self.results = None
-
-    def get_dict(self):
-        info = {}
-        info['email'] = self.email
-        info['license_key'] = self.license_key
-        info['maturitydate'] = self.maturitydate
-        info['ctoken'] = self.ctoken
-
-        return info
+        self.timestamp = timestamp
 
 
 def db_data_initialize():
     pass
+

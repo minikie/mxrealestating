@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import hashlib
 import pandas as pd
 from datetime import datetime
@@ -56,15 +57,37 @@ def test():
     dates = []
     inflows = []
     outflows = []
+    report_date.date()
     for i in range(projection_month_count):
         date_after_month = report_date + relativedelta(months=i)
         d_str = date_after_month.strftime('%Y-%m-%d')
         dates.append(d_str)
 
-        [p. for p in position_items]
+        # [p. for p in position_items]
         inflows.append()
         outflows.append(float(df['book_value'].sum()))
 
 
+# 구분
+# 법정동 : legal_dong
+# 아파트 : apt_name
+# 전용면적 : private_area
+# 지역코드 : region_code
+def calculate_price(position):
+    res = dict()
+
+    res['trade_type'] = 'rent'
+    res['price'] = 30000
+    res['monthly_payment'] = 0
+    res['reserve_amount'] = 10000
+    res['trade_price'] = 30000
+
+    return res
 
 
+# json_string = '''
+# [{u'name': u'test name1', u'position_type': u'owner_occupied', u'loan': {u'effective_date': u'2018-10-11', u'amount': 0, u'type': u'fixed', u'rate': 0.03, u'maturity_date': u'2018-10-11'}, u'address': u'test address', u'hasLoan': False, u'rent': {u'effective_date': u'2018-10-11', u'monthly_payment': 1000, u'deposit': 0, u'maturity_date': u'2018-10-11'}, u'book_date': u'2018-10-11', u'book_value': 10000}, {u'name': u'test name2', u'position_type': u'owner_occupied', u'loan': {u'effective_date': u'2018-10-11', u'amount': 0, u'type': u'fixed', u'rate': 0.03, u'maturity_date': u'2018-10-11'}, u'address': u'test address', u'hasLoan': False, u'rent': {u'effective_date': u'2018-10-11', u'monthly_payment': 1000, u'deposit': 0, u'maturity_date': u'2018-10-11'}, u'book_date': u'2018-10-11', u'book_value': 10000}]
+# '''
+#
+# import json
+# print json.loads(json_string)

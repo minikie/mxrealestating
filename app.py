@@ -110,28 +110,64 @@ def store_positions():
 
     email = request_json['email']
     position_list = request_json['position_list']
+
     key = gen_key(email, position_list)
     #p = Position(key, email, positions)
+
+    timestamp = str(datetime.datetime.utcnow())
 
     p = Position.query.filter(Position.email == email).first()
 
     if p is None:
-        p = Position(key, email, str(position_list))
+        p = Position(key, email, json.dumps(position_list), timestamp)
         db_session.add(p)
     else:
-        p.positions = str(position_list)
+        p.positions = json.dumps(position_list)
         p.key = key
 
     db_session.commit()
 
     res = dict()
     # res['access_key'] = key
+
+    res['timestamp'] = timestamp
+    res['message'] = 'success'
+    res['access_key'] = key
+
+    # email 보냄
+
+    return jsonify(res)
+
+
+@app.route('/getpositions', methods=['POST'])
+def get_positions():
+    # post
+    request_json = request.json
+
+    key = request_json['key']
+    # p = Position(key, email, positions)
+
+    p = Position.query.filter(Position.key == key).first()
+
+    res = dict()
+    # res['access_key'] = key
     timestamp = str(datetime.datetime.utcnow())
     res['timestamp'] = timestamp
     res['message'] = 'success'
-    
-    # email 보냄
 
+    if p is None:
+        res['message'] = 'fail'
+        return jsonify(res)
+    else:
+        data = dict()
+        data['userinfo'] = dict()
+        data['userinfo']['email'] = p.email
+        data['position_list'] = json.loads(p.positions)
+        data['results'] = p.results
+
+        res['data'] = data
+
+    # email 보냄
 
     return jsonify(res)
 
