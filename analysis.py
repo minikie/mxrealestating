@@ -5,24 +5,98 @@ from dateutil.relativedelta import relativedelta
 from pandas.io.json import json_normalize
 from utilities import CF_Row
 
-class PositionItem:
-    def __init__(self, **args):
-        self.name = args['name']
-        self.address = args['address']
-        self.maturity_date = args['maturity_date']
 
-    def get_cashflow(self, report_date):
+class PositionItem:
+    def __init__(self):
+        pass
+
+    def get_cashflow(self, report_date, end_date):
+        pass
+
+
+class Loan(PositionItem):
+    def __init__(self, args):
+        PositionItem.__init__(self)
+        self.amount = args['amount']
+        self.rate = args['rate']
+
+    def get_cashflow(self, report_date, end_date):
+        roop_date = report_date
         cashflows = []
-        roop_date = report_date.date()
-        while (roop_date <= self.maturity_date ):
+
+        while (roop_date <= end_date):
             roop_date = roop_date + relativedelta(months=1)
             d_str = roop_date.strftime('%Y-%m-%d')
-            cashflows.append(CF_Row(d_str, ))
+            coupon = self.amount * self.rate / 12.0 # monthly payment
+            cashflows.append(CF_Row(d_str, 0.0, coupon, coupon))
+
+        return pd.DataFrame(cashflows)
 
 
+class Rent(PositionItem):
+    def __init__(self, args):
+        PositionItem.__init__(self)
+        self.maturity_date = args['maturity_date']
+        self.monthly_payment = args['monthly_payment']
+
+    def get_cashflow(self, report_date, end_date):
+        roop_date = report_date
+        cashflows = []
+
+        while (roop_date <= end_date):
+            roop_date = roop_date + relativedelta(months=1)
+            d_str = roop_date.strftime('%Y-%m-%d')
+            cashflows.append(CF_Row(d_str, self.monthly_payment, 0.0, self.monthly_payment))
+
+        return pd.DataFrame(cashflows)
+
+
+class Apartment(PositionItem):
+    def __init__(self, args):
+        PositionItem.__init__(self)
+        self.name = args['name']
+        self.address = args['address']
+        self.loan = Loan(args['loan'])
+        self.rent = Rent(args['rent'])
+
+
+    def get_cashflow(self, report_date, end_date):
+        roop_date = report_date.date()
+
+        loan_cf = self.loan.get_cashflow(report_date, end_date)
+        rent_cf = self.rent.get_cashflow(report_date, end_date)
+
+        return loan_cf.append(rent_cf)
+
+
+def positionitem_factory(args):
+    p_type = args['asset_type']
+    if p_type == 'apartment':
+        return Apartment(args)
+    else:
+        raise Exception('unknown position type')
 
 
 def position_analysis(position_items):
+    def position_cf_mapping(position_obj_list, report_date, end_date):
+        roop_date = report_date
+        base_cashflows = []
+
+        while (roop_date <= end_date):
+            roop_date = roop_date + relativedelta(months=1)
+            d_str = roop_date.strftime('%Y-%m-%d')
+            base_cashflows.append(CF_Row(d_str, 0.0, 0.0, 0.0))
+
+        base_cashflows_df = pd.DataFrame(base_cashflows)
+
+        for p in position_obj_list:
+            position_obj = positionitem_factory(p)
+            p_df = position_obj.get_cashflow(result_date, end_date)
+            base_cashflows_df = base_cashflows_df.append(p_df)
+
+        return base_cashflows_df.groupby('DATE').sum()
+
+
     res = dict()
 
     # dataframe ?
@@ -51,9 +125,11 @@ def position_analysis(position_items):
     #             }
     #
     #         },
+    result_date = datetime.datetime.today()
+    end_date = result_date + relativedelta(years=5)
 
     results_data = dict()
-    results_data['result_date'] = "2018-10-11"
+    results_data['result_date'] = result_date.strftime('%Y-%m-%d')
     results_data['timestamp'] = timestamp = str(datetime.datetime.utcnow())
 
     summary = dict()
@@ -66,10 +142,12 @@ def position_analysis(position_items):
 
     results_data['summary'] = summary
 
+    result_df = position_cf_mapping(position_items, result_date, end_date)
+
     flows = dict()
-    flows['dates'] = ["2018-10-11", '2018-11-11']
-    flows['inflows'] = [100, 100]
-    flows['outflows'] = [200, 150]
+    flows['dates'] = result_df.index.tolist()
+    flows['inflows'] = result_df['IN'].tolist()
+    flows['outflows'] = result_df['OUT'].tolist()
 
     results_data['flows'] = flows
 
@@ -79,12 +157,13 @@ def position_analysis(position_items):
 
 
 if __name__ == '__main__':
-    print ('test')
+    print ('------------------------test-------------------------')
 
     json_str = '''{
         "position_list": [
             {
                 "name": "test name1",
+                "asset_type": "apartment",
                 "address": "test address",
                 "book_value": 10000,
                 "book_date": "2018-10-11",
@@ -97,7 +176,7 @@ if __name__ == '__main__':
                 },
                 "hasLoan": false,
                 "loan": {
-                    "amount": 0,
+                    "amount": 10000,
                     "type":"fixed",
                     "rate": 0.03,
                     "effective_date": "2018-10-11",
@@ -106,19 +185,20 @@ if __name__ == '__main__':
             },
             {
                 "name": "test name2",
+                "asset_type": "apartment",
                 "address": "test address",
                 "book_value": 10000,
                 "book_date": "2018-10-11",
                 "position_type": "owner_occupied",
                 "rent": {
                     "deposit": 0,
-                    "monthly_payment": 1000,
+                    "monthly_payment": 300,
                     "effective_date": "2018-10-11",
                     "maturity_date": "2018-10-11"
                 },
                 "hasLoan": false,
                 "loan": {
-                    "amount": 0,
+                    "amount": 20000,
                     "type":"fixed",
                     "rate": 0.03,
                     "effective_date": "2018-10-11",

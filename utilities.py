@@ -68,6 +68,8 @@ def test():
         outflows.append(float(df['book_value'].sum()))
 
 
+
+
 # 구분
 # 법정동 : legal_dong
 # 아파트 : apt_name
@@ -91,3 +93,33 @@ def calculate_price(position):
 #
 # import json
 # print json.loads(json_string)
+if __name__ == '__main__':
+    cf11 = CF_Row('2018-10-11', 100, 110, -10)
+    cf12 = CF_Row('2018-11-11', 200, 210, -10)
+
+    cfs1 = [cf11, cf12]
+    df1 = pd.DataFrame(cfs1)
+    df1.set_index('DATE')
+
+
+    cf21 = CF_Row('2018-11-11', 100, 110, -10)
+    cf22 = CF_Row('2018-12-11', 200, 210, -10)
+
+    cfs2 = [cf21, cf22]
+    df2 = pd.DataFrame(cfs2)
+    df2.set_index('DATE')
+
+    #print (df1.append(df2)).groupby('DATE').sum().to_json(orient='split')
+    df = (df1.append(df2)).groupby('DATE').sum()
+    # print df.to_json(orient='split')
+    # print df.to_json(orient='index')
+    # print df.to_json(orient='records')
+    # print df.to_json(orient='columns')
+    from flask import jsonify
+
+    print df['IN']
+
+
+    # import numpy as np
+    # take_smaller = lambda s1, s2: s1+s2
+    # print df1.combine(df2, take_smaller)
