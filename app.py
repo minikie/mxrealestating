@@ -8,7 +8,8 @@ from analysis import position_analysis
 from utilities import gen_key, invalid_request
 from flask_cors import CORS
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='dist/static', template_folder='dist')
+
 app.secret_key = 'sample_secreat_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
 
