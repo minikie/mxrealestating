@@ -8,7 +8,7 @@ from collections import namedtuple
 CF_Row = namedtuple('CF_Row', 'DATE IN OUT NET')
 
 def gen_key(email, positions):
-    print str(positions)
+    # print str(positions)
     return hashlib.sha256(email + str(positions)).hexdigest()
 
 
@@ -115,9 +115,9 @@ if __name__ == '__main__':
     # print df.to_json(orient='index')
     # print df.to_json(orient='records')
     # print df.to_json(orient='columns')
-    from flask import jsonify
+    # from flask import jsonify
 
-    print df['IN']
+    # print df['IN']
 
 
     # import numpy as np
