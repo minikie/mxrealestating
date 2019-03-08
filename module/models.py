@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text, BigInteger, DateTime
-from database import Base, db_session
+from module.database import Base, db_session
 import datetime
 
 class Position(Base):
