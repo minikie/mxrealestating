@@ -209,7 +209,7 @@ if __name__ == '__main__':
         }
     '''
 
-    import json    # or `import simplejson as json` if on Python < 2.6
+    # import json    # or `import simplejson as json` if on Python < 2.6
 
-    obj = json.loads(json_str)
-    print position_analysis(obj['position_list'])
+    # obj = json.loads(json_str)
+    # print position_analysis(obj['position_list'])
