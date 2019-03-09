@@ -20,8 +20,8 @@ init_db()
 
 @app.route('/')
 def index():
-    #return render_template('index.html')
-    return 'This Works'
+    return render_template('index.html')
+
 
 
 @app.route('/test')
