@@ -3,3 +3,7 @@ sqlalchemy
 Flask-Cors
 gunicorn==19.7.1
 pandas
+ply==3.4
+beautifulsoup4
+requests
+slimit

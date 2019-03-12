@@ -1,11 +1,31 @@
 # -*- coding: utf-8 -*-
+import requests
 import hashlib
 import pandas as pd
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from collections import namedtuple
+from bs4 import BeautifulSoup
+from slimit.ast import String as astString
+from slimit.parser import Parser
+from slimit.visitors.nodevisitor import ASTVisitor
+from urllib.parse import urlparse, parse_qsl
+
 
 CF_Row = namedtuple('CF_Row', 'DATE IN OUT NET')
+
+
+class NaverDataVisitor(ASTVisitor):
+    def visit_Object(self, node):
+        self.res = dict()
+
+        for prop in node:
+            left, right = prop.left, prop.right
+            if type(right) is astString:
+                self.res[left.value] = right.value
+                # print('Property key=%s, value=%s' % (left.value, right.value))
+            # visit all children in turn
+            self.visit(prop)
 
 def gen_key(email, positions):
     # print str(positions)
@@ -27,6 +47,38 @@ def cashflow_merge(positions):
     cf = pd.DataFrame()
 
     return cf
+
+
+def position_info_from_naver(url):
+    parsed_obj = urlparse(url)
+    article_info_no = 1
+    if parsed_obj.netloc == 'm.land.naver.com':
+        article_info_no = parsed_obj.path.split('/')[-1]
+    elif parsed_obj.netloc == 'new.land.naver.com':
+        article_info_no = dict(parse_qsl(parsed_obj.query))['articleNo']
+    else:
+        raise Exception('unknown url : ' + parsed_obj.netloc )
+
+    r = requests.get('https://m.land.naver.com/article/info/' + str(article_info_no))
+    soup = BeautifulSoup(r.content, "html.parser")
+    res = dict()
+
+    for sc in soup.findAll("script"):
+        pos = sc.text.find('land.articleDetail.jsonPageData')
+        if pos > 0:
+            bracket_start_pos = sc.text.find('{',pos)
+            bracket_end_pos = sc.text.find(';', pos)
+            #print(sc.text[bracket_start_pos:bracket_end_pos])
+            #js_obj_txt = sc.text[bracket_start_pos:bracket_end_pos]
+            js_obj_txt = sc.text[pos:bracket_end_pos]
+            # print(js_obj_txt)
+            parser = Parser()
+            tree = parser.parse(js_obj_txt)
+            visitor = NaverDataVisitor()
+            visitor.visit(tree)
+            res = visitor.res
+
+    return res
 
 
 def test():
@@ -68,7 +120,34 @@ def test():
         outflows.append(float(df['book_value'].sum()))
 
 
+def test1():
+    cf11 = CF_Row('2018-10-11', 100, 110, -10)
+    cf12 = CF_Row('2018-11-11', 200, 210, -10)
 
+    cfs1 = [cf11, cf12]
+    df1 = pd.DataFrame(cfs1)
+    df1.set_index('DATE')
+
+    cf21 = CF_Row('2018-11-11', 100, 110, -10)
+    cf22 = CF_Row('2018-12-11', 200, 210, -10)
+
+    cfs2 = [cf21, cf22]
+    df2 = pd.DataFrame(cfs2)
+    df2.set_index('DATE')
+
+    # print (df1.append(df2)).groupby('DATE').sum().to_json(orient='split')
+    df = (df1.append(df2)).groupby('DATE').sum()
+    # print df.to_json(orient='split')
+    # print df.to_json(orient='index')
+    # print df.to_json(orient='records')
+    # print df.to_json(orient='columns')
+    # from flask import jsonify
+
+    # print df['IN']
+
+    # import numpy as np
+    # take_smaller = lambda s1, s2: s1+s2
+    # print df1.combine(df2, take_smaller)
 
 # 구분
 # 법정동 : legal_dong
@@ -94,32 +173,4 @@ def calculate_price(position):
 # import json
 # print json.loads(json_string)
 if __name__ == '__main__':
-    cf11 = CF_Row('2018-10-11', 100, 110, -10)
-    cf12 = CF_Row('2018-11-11', 200, 210, -10)
-
-    cfs1 = [cf11, cf12]
-    df1 = pd.DataFrame(cfs1)
-    df1.set_index('DATE')
-
-
-    cf21 = CF_Row('2018-11-11', 100, 110, -10)
-    cf22 = CF_Row('2018-12-11', 200, 210, -10)
-
-    cfs2 = [cf21, cf22]
-    df2 = pd.DataFrame(cfs2)
-    df2.set_index('DATE')
-
-    #print (df1.append(df2)).groupby('DATE').sum().to_json(orient='split')
-    df = (df1.append(df2)).groupby('DATE').sum()
-    # print df.to_json(orient='split')
-    # print df.to_json(orient='index')
-    # print df.to_json(orient='records')
-    # print df.to_json(orient='columns')
-    # from flask import jsonify
-
-    # print df['IN']
-
-
-    # import numpy as np
-    # take_smaller = lambda s1, s2: s1+s2
-    # print df1.combine(df2, take_smaller)
+    print(position_info_from_naver('https://m.land.naver.com/article/info/1905842490'))

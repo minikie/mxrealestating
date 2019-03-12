@@ -5,7 +5,9 @@ import os, json, datetime
 from module.database import db_session, init_db
 from module.models import Position
 from analysis import position_analysis
-from utilities import gen_key, invalid_request
+import utilities
+#from utilities import gen_key, invalid_request,
+
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder='dist/static', template_folder='dist')
@@ -113,7 +115,7 @@ def store_positions():
     email = request_json['email']
     position_list = request_json['position_list']
 
-    key = gen_key(email, position_list)
+    key = utilities.gen_key(email, position_list)
     #p = Position(key, email, positions)
 
     timestamp = str(datetime.datetime.utcnow())
@@ -174,13 +176,46 @@ def get_positions():
     return jsonify(res)
 
 
+@app.route('/parse_position_info', methods=['POST'])
+def parse_position_info():
+    # post
+    request_json = request.json
+
+    url = request_json['url']
+    position_info = utilities.position_info_from_naver(url)
+
+    res = dict()
+    timestamp = str(datetime.datetime.utcnow())
+
+    # res['access_key'] = key
+
+    # https://m.land.naver.com/article/info/1905842490
+    # 화면
+    res['full_address'] = position_info['addr'] + ' ' + position_info['atclNm']
+    res['dong_name'] = position_info['cortarNm'] #
+    res['private_area'] = position_info['spc'] # 면적
+    res['currenct_price'] = position_info['dealAmt']  # 현재가격(만원)
+
+    #내부용
+    res['dong_no'] = position_info['atclNo'] # 법정동 코드
+
+    res['timestamp'] = timestamp
+    res['message'] = 'success'
+
+    # email 보냄
+
+    return jsonify(res)
+
+
 @app.route('/robots.txt')
 def robot_to_root():
     return send_from_directory(app.static_folder, request.path[1:])
 
+
 @app.route('/sitemap.xml')
 def sitemap_to_root():
     return send_from_directory(app.static_folder, request.path[1:])
+
 
 @app.route('/google45f2d19c6c554811.html')
 def google_site_confirm():
