@@ -27,9 +27,20 @@ class NaverDataVisitor(ASTVisitor):
             # visit all children in turn
             self.visit(prop)
 
+
 def gen_key(email, positions):
     # print str(positions)
-    return hashlib.sha256(email + str(positions)).hexdigest()
+    _str = email + str(positions)
+
+    return hashlib.sha256(_str.encode('utf-8')).hexdigest()
+
+
+def get_hash(*args):
+    # print str(positions)
+    _str = ''
+    for arg in args:
+        _str += arg
+    return hashlib.sha256(_str.encode('utf-8')).hexdigest()
 
 
 def invalid_request():
@@ -47,6 +58,23 @@ def cashflow_merge(positions):
     cf = pd.DataFrame()
 
     return cf
+
+
+def get_userinfo(user):
+    if user.provider_type == 'naver':
+        return user_info_from_naver(user)
+    elif user.provider_type == 'daum':
+        return user_info_from_daum(user)
+    else:
+        return None
+
+
+def user_info_from_daum(user):
+    pass
+
+
+def user_info_from_naver(user):
+    pass
 
 
 def position_info_from_naver(url):
