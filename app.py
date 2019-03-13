@@ -22,10 +22,11 @@ CORS(app)
 
 init_db()
 
-@app.route('/', methods=['GET, POST'])
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    resp = make_response(render_template('index.html'))
-    resp.set_cookie('userID', 'testID')
+    # resp = make_response(render_template('index.html'))
+    # resp.set_cookie('userID', 'testID')
 
     # ------------------------------------------------------------------------
     # Get 인 경우에
@@ -59,24 +60,30 @@ def index():
         login_hash = utilities.get_hash(access_token, ip)
 
         user = UserLogin.query.filter(UserLogin.access_token == access_token).first()
+        timestamp = str(datetime.datetime.utcnow())
+        provider = 'naver'
 
         if user is None:
-            p = Position(login_hash, email, json.dumps(position_list), timestamp)
-            db_session.add(p)
+            user = UserLogin(login_hash, access_token, provider, timestamp)
+            db_session.add(user)
         else:
-            p.positions = json.dumps(position_list)
-            p.key = key
+            user.access_token = access_token
+            user.login_hash = login_hash
+            user.provider = provider
+            user.timestamp = timestamp
 
         db_session.commit()
+    else:
+        return redirect(url_for('login'))
 
-    return resp
+    return render_template('index.html')
 
 
     #return render_template('index.html')
 
 
 @app.route('/login', methods=['GET'])
-def index():
+def login():
     return render_template('login.html')
 
 
