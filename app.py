@@ -25,6 +25,11 @@ init_db()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    return render_template('index.html')
+
+
+@app.route('/test', methods=['GET', 'POST'])
+def index_test():
     # resp = make_response(render_template('index.html'))
     # resp.set_cookie('userID', 'testID')
 
@@ -95,9 +100,8 @@ def cookie():
 
 
 @app.route('/test')
-def test_db():
-    db_session.add(Position('name','city','addr'))
-    return 'success'
+def test_index():
+    return render_template('index.html')
 
 
 # 예전에 저장했던 데이터
