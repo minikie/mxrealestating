@@ -2,12 +2,12 @@
 from pandas import util
 
 from flask import request, render_template, jsonify, send_from_directory
-from flask import Flask, url_for, redirect, session, make_response
+from flask import Flask, url_for, redirect, session, make_response, abort
 import os, json, datetime
 from module.database import db_session, init_db
 from module.models import Position, UserLogin
 from analysis import position_analysis
-import utilities
+import utilities, random
 #from utilities import gen_key, invalid_request,
 
 from flask_cors import CORS
@@ -25,7 +25,9 @@ init_db()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    resp = make_response(render_template('index.html'))
+    resp.set_cookie('position_token', utilities.get_hash(str(random.random()),str(random.random())))
+    return resp
 
 
 @app.route('/test', methods=['GET', 'POST'])
@@ -94,7 +96,7 @@ def login():
 
 @app.route('/cookie')
 def cookie():
-    name = request.cookies.get('userID')
+    name = request.cookies.get('myname')
     return '<h1>welcome ' + name + '</h1>'
 
 
@@ -174,34 +176,41 @@ def analysis():
     #     },
     # ]
 
+    if len(position_items) == 0:
+        abort(400, 'position_list is empty')
+
     res = position_analysis(position_items)
+
 
     return jsonify(res)
 
 
 @app.route('/storepositions', methods=['POST'])
 def store_positions():
+    #position_token = request.cookies.get('position_token')
+
     # post
     request_json = request.json
 
     print(request_json)
 
     email = request_json['email']
+    position_token = request_json['position_token']
     position_list = request_json['position_list']
 
-    key = utilities.gen_key(email, position_list)
+    #key = utilities.gen_key(email, position_list)
     #p = Position(key, email, positions)
 
     timestamp = str(datetime.datetime.utcnow())
 
-    p = Position.query.filter(Position.email == email).first()
+    p = Position.query.filter(Position.key == position_token).first()
 
     if p is None:
-        p = Position(key, email, json.dumps(position_list), timestamp)
+        p = Position(position_token, email, json.dumps(position_list), timestamp)
         db_session.add(p)
     else:
         p.positions = json.dumps(position_list)
-        p.key = key
+        p.key = position_token
 
     db_session.commit()
 
@@ -210,7 +219,6 @@ def store_positions():
 
     res['timestamp'] = timestamp
     res['message'] = 'success'
-    res['access_key'] = key
 
     # email 보냄
 
@@ -222,7 +230,7 @@ def get_positions():
     # post
     request_json = request.json
 
-    key = request_json['key']
+    key = request_json['position_token']
     # p = Position(key, email, positions)
 
     p = Position.query.filter(Position.key == key).first()

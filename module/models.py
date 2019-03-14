@@ -22,7 +22,7 @@ class UserLogin(Base):
 class Position(Base):
     __tablename__ = 'positions'
     key = Column(String(128), primary_key=True)
-    email = Column(String(120), unique=True)
+    email = Column(String(120))
     positions = Column(Text)
     results = Column(Text)
     timestamp = Column(String(30))
@@ -34,7 +34,7 @@ class Position(Base):
         self.key = key
         self.email = email
         self.positions = positions
-        self.results = None
+        self.results = ''
         self.timestamp = timestamp
 
 
