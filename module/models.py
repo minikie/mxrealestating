@@ -38,6 +38,23 @@ class Position(Base):
         self.timestamp = timestamp
 
 
+class Report(Base):
+    __tablename__ = 'reports'
+    key = Column(String(128), primary_key=True)
+    position_token = Column(String(128))
+    results = Column(Text)
+    timestamp = Column(String(30))
+
+    def __repr__(self):
+        return '<Report %r>' % (self.email)
+
+    def __init__(self, key, position_token, results, timestamp):
+        self.key = key
+        self.position_token = position_token
+        self.results = results
+        self.timestamp = timestamp
+
+
 def db_data_initialize():
     pass
 

@@ -5,7 +5,7 @@ from flask import request, render_template, jsonify, send_from_directory
 from flask import Flask, url_for, redirect, session, make_response, abort
 import os, json, datetime
 from module.database import db_session, init_db
-from module.models import Position, UserLogin
+from module.models import Position, UserLogin, Report
 from analysis import position_analysis
 import utilities, random
 #from utilities import gen_key, invalid_request,
@@ -25,9 +25,10 @@ init_db()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    resp = make_response(render_template('index.html'))
-    resp.set_cookie('position_token', utilities.get_hash(str(random.random()),str(random.random())))
-    return resp
+    #resp = make_response(render_template('index.html'))
+    # resp.set_cookie('position_token', utilities.get_hash(str(random.random()),str(random.random())))
+    # return resp
+    return render_template('index.html')
 
 
 @app.route('/test', methods=['GET', 'POST'])
@@ -119,68 +120,20 @@ def analysis():
     # post
     request_json = request.json
 
+    position_token = request_json['position_token']
     position_items = request_json['position_list']
-
-    # position_items = [
-    #     {
-    #         'name': '수정동1',
-    #         'address': '경기도 어쩌구',
-    #         'location_x': 10.222,
-    #         'location_y': 25.241,
-    #         'book_value' : 1000,
-    #         'book_date': '2018-10-11',
-    #         'position_type' : 'owner_occupied',
-    #         'loan' : {
-    #           'notional' : 10000,
-    #           'loan_type': 0.012,
-    #           'loan_rate' : 0.012,
-    #           'maturity' : 2020-10-11
-    #       },
-    #         'rent': {
-    #           'deposit': {
-    #               'amount': 10000,
-    #           },
-    #           'payment': {
-    #               'frequency': 'monthly',
-    #               'amount': 1000
-    #           },
-    #           'start_date' : '2020-10-11',
-    #           'maturity_date': '2020-10-11'
-    #       },
-    #     },
-    #     {
-    #         'name': '수정동2',
-    #         'address': '경기도 어쩌구',
-    #         'location_x': 10.222,
-    #         'location_y': 25.241,
-    #         'book_value' : 1000,
-    #         'book_date': '2018-10-11',
-    #         'position_type' : 'owner_occupied',
-    #         'loan' : {
-    #           'notional' : 10000,
-    #           'loan_type': 0.012,
-    #           'loan_rate' : 0.012,
-    #           'maturity' : 2020-10-11
-    #       },
-    #         'rent': {
-    #           'deposit': {
-    #               'amount': 10000,
-    #           },
-    #           'payment': {
-    #               'frequency': 'monthly',
-    #               'amount': 1000
-    #           },
-    #           'start_date' : '2020-10-11',
-    #           'maturity_date': '2020-10-11'
-    #       },
-    #     },
-    # ]
 
     if len(position_items) == 0:
         abort(400, 'position_list is empty')
 
     res = position_analysis(position_items)
+    res['results_data']['timestamp'] = str(datetime.datetime.utcnow())
 
+    p = Position.query.filter(Position.key == position_token).first()
+
+    if p is not None:
+        p.results = json.dumps(res['results_data'])
+        db_session.commit()
 
     return jsonify(res)
 
@@ -197,6 +150,7 @@ def store_positions():
     email = request_json['email']
     position_token = request_json['position_token']
     position_list = request_json['position_list']
+    results_data = json.dumps(request_json['results_data'])
 
     #key = utilities.gen_key(email, position_list)
     #p = Position(key, email, positions)
@@ -207,10 +161,14 @@ def store_positions():
 
     if p is None:
         p = Position(position_token, email, json.dumps(position_list), timestamp)
+        p.results = results_data
         db_session.add(p)
     else:
         p.positions = json.dumps(position_list)
+        p.results = results_data
         p.key = position_token
+        p.timestamp = timestamp
+
 
     db_session.commit()
 
@@ -249,7 +207,10 @@ def get_positions():
         data['userinfo'] = dict()
         data['userinfo']['email'] = p.email
         data['position_list'] = json.loads(p.positions)
-        data['results'] = p.results
+        if p.results == '' or p.results is None:
+            data['results_data'] = None
+        else:
+            data['results_data'] = json.loads(p.results)
 
         res['data'] = data
 
@@ -273,7 +234,10 @@ def parse_position_info():
 
     # https://m.land.naver.com/article/info/1905842490
     # 화면
-    res['address'] = position_info['addr'] + ' ' + position_info['atclNm']
+    print(position_info['addr'])
+    print(position_info['atclNm'])
+
+    res['address'] = str(position_info['addr'] + ' ' + position_info['atclNm']).replace("'","")
     res['apt_name'] = position_info['atclNm']
     res['legal_dong'] = position_info['cortarNm'] #
     res['private_area'] = position_info['spc'] # 면적
@@ -289,6 +253,51 @@ def parse_position_info():
 
     return jsonify(res)
 
+
+@app.route('/export_report', methods=['POST'])
+def export_report():
+    request_json = request.json
+
+    report_token = request_json['report_token']
+    position_token = request_json['position_token'] # report owner
+    results_data = json.dumps(request_json['results_data'])
+
+    r = Report.query.filter(Report.key == report_token and Report.position_token == position_token).first()
+    timestamp = str(datetime.datetime.utcnow())
+
+    if r is None:
+        r = Report(report_token, position_token, results_data, timestamp)
+        db_session.add(r)
+    else:
+        r.results = results_data
+        r.timestamp = timestamp
+
+    db_session.commit()
+
+    res = dict()
+
+    res['timestamp'] = timestamp
+    res['message'] = 'success'
+
+    return jsonify(res)
+
+
+@app.route('/report/<report_token>', methods=['GET'])
+def get_report(report_token):
+    r = Report.query.filter(Report.key == report_token).first()
+
+    # timestamp = str(datetime.datetime.utcnow())
+
+    if r is None:
+        abort(400, 'no report exist')
+    else:
+        report_data = json.loads(r.results)
+        return render_template('report.html', report_data=report_data)
+
+
+# --------------------------------------------------------------------------------------------------
+# site setting ----------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------
 
 @app.route('/robots.txt')
 def robot_to_root():
