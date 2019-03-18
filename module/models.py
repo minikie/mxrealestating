@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, BigInteger, DateTime
+from sqlalchemy import Column, Integer, String, Text, BigInteger, DateTime, Float
 from module.database import Base, db_session
 import datetime
 
@@ -54,6 +54,21 @@ class Report(Base):
         self.results = results
         self.timestamp = timestamp
 
+
+class TradePrice(Base):
+    __tablename__ = 'tradeprices'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    tradeprice = Column(Float)
+    yyyymm = Column(String(30))
+    timestamp = Column(String(30))
+
+    def __repr__(self):
+        return '<Report %r>' % (self.email)
+
+    def __init__(self, yyyymm, tradeprice, timestamp):
+        self.yyyymm = yyyymm
+        self.tradeprice = tradeprice
+        self.timestamp = timestamp
 
 def db_data_initialize():
     pass

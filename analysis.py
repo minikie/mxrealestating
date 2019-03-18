@@ -77,6 +77,12 @@ def positionitem_factory(args):
         raise Exception('unknown position type')
 
 
+# 최신 데이터..?
+def get_trade_price(position_item, yyyymm):
+    # db 에서 물어옴
+    return
+
+
 def position_analysis(position_items):
     def position_cf_mapping(position_obj_list, report_date, end_date):
         roop_date = report_date
