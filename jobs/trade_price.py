@@ -1,40 +1,20 @@
 from module.database import db_session, init_db
 from module.models import TradePrice
-import pandas as pd
-import requests
+from analysis import download_trade_price
 import datetime
 
-api_key = 'open_api_key'
-init_db()
 
 # https://financedata.github.io/posts/korea-area-code.html
 
 def start():
     # 현재월
     today = datetime.datetime.today()
-    yyyymm = str(today.year) + str(today.month)
-    parameters = { 'LAWD_CD': 'value1',
-                   'DEAL_YMD': 'value2',
-                   'numOfRows': 1000,
-                   'serviceKey': api_key }
+    # yyyymm = str(today.year) + str(today.month)
+    yyyymm = today.strftime('%Y%m')
+    region_codes = [11110, 11112]
 
-    #url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?_wadl&type=xml'
-
-    url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?_wadl&type=xml'
-    res = requests.get(url, params=parameters)
-
-    # res -> xml parsing
-    df = pd.DataFrame()
-
-    timestamp = str(datetime.datetime.utcnow())
-
-    # 지워지나..?
-    TradePrice.query.filter(TradePrice.yyyymm == yyyymm).delete()
-
-    for i in df:
-        db_session.add(TradePrice(yyyymm, 0.0, timestamp))
-
-    db_session.commit()
+    for rc in region_codes:
+        download_trade_price(rc, yyyymm)
 
 
 def test_data_insert():

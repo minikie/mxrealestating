@@ -1,0 +1,1892 @@
+'
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <grammars>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+                   elementFormDefault="unqualified">\r\n
+            <xs:element name="GetRTMSDataSvcAptRentDevVO" type="getRTMSDataSvcAptRentDevVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcAptRentVO" type="getRTMSDataSvcAptRentVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcAptTradeDevVO" type="getRTMSDataSvcAptTradeDevVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcAptTradeVO" type="getRTMSDataSvcAptTradeVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcLandTradeVO" type="getRTMSDataSvcLandTradeVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcNrgTradeVO" type="getRTMSDataSvcNrgTradeVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcOffiRentDevVO" type="getRTMSDataSvcOffiRentDevVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcOffiRentVO" type="getRTMSDataSvcOffiRentVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcOffiTradeDevVO" type="getRTMSDataSvcOffiTradeDevVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcOffiTradeVO" type="getRTMSDataSvcOffiTradeVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcRHRentDevVO" type="getRTMSDataSvcRHRentDevVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcRHRentVO" type="getRTMSDataSvcRHRentVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcRHTradeDevVO" type="getRTMSDataSvcRHTradeDevVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcRHTradeVO" type="getRTMSDataSvcRHTradeVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcSHRentVO" type="getRTMSDataSvcSHRentVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcSHTradeVO" type="getRTMSDataSvcSHTradeVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcSilvTradeDevVO" type="getRTMSDataSvcSilvTradeDevVO"/>
+            \r\n
+            <xs:element name="GetRTMSDataSvcSilvTradeVO" type="getRTMSDataSvcSilvTradeVO"/>
+            \r\n
+            <xs:element name="GetRTMSTestVO" type="getRTMSTestVO"/>
+            \r\n
+            <xs:element name="header" nillable="true" type="xs:anyType"/>
+            \r\n
+            <xs:element name="response" nillable="true" type="xs:anyType"/>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHTradeResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcRHTradeBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHTradeHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHTradeBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcRHTradeVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHTradeVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:decimal"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="대지권면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="연립다세대" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiRentResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcOffiRentBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiRentHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiRentBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcOffiRentVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiRentVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="단지" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="보증금" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="시군구" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월세" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:long"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptTradeDevResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcAptTradeDevBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptTradeDevHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptTradeDevBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcAptTradeDevVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptTradeDevVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물본번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물부번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명일련번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명지상지하코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동본번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동부번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동읍면동코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동지번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="아파트" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일련번호" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcNrgTradeResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcNrgTradeBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcNrgTradeHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcNrgTradeBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcNrgTradeVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcNrgTradeVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="건물면적" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="건물주용도" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="구분" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="대지면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="시군구" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="용도지역" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="유형" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:decimal"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSilvTradeDevResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcSilvTradeDevBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSilvTradeDevHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSilvTradeDevBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcSilvTradeDevVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSilvTradeDevVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="구분" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="단지" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물본번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물부번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명일련번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명지상지하코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동본번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동부번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동읍면동코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동지번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="시군구" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHRentDevResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcRHRentDevBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHRentDevHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHRentDevBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcRHRentDevVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHRentDevVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:decimal"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물본번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물부번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명일련번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명지상지하코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동본번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동부번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동읍면동코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동지번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="보증금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="연립다세대" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월세금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일련번호" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiRentDevResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcOffiRentDevBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiRentDevHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiRentDevBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcOffiRentDevVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiRentDevVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="단지" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물본번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물부번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명일련번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명지상지하코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동본번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동부번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동읍면동코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동지번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="보증금" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="시군구" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월세" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptRentResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcAptRentBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptRentHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptRentBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcAptRentVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptRentVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="보증금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="아파트" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월세금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptTradeResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcAptTradeBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptTradeHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptTradeBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcAptTradeVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptTradeVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="아파트" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptRentDevResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcAptRentDevBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptRentDevHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptRentDevBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcAptRentDevVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcAptRentDevVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물본번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물부번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명일련번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명지상지하코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동본번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동부번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동읍면동코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동지번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="보증금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="아파트" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월세금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일련번호" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSilvTradeResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcSilvTradeBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSilvTradeHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSilvTradeBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcSilvTradeVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSilvTradeVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="구분" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="단지" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="시군구" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:decimal"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:long"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHRentResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcRHRentBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHRentHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHRentBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcRHRentVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHRentVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:decimal"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="보증금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="연립다세대" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월세금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSHTradeResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcSHTradeBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSHTradeHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSHTradeBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcSHTradeVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSHTradeVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:decimal"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="대지면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="연면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="주택유형" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHTradeDevResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcRHTradeDevBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHTradeDevHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHTradeDevBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcRHTradeDevVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcRHTradeDevVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:decimal"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="대지권면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물본번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물부번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명일련번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명지상지하코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동본번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동부번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동읍면동코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동지번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="연립다세대" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일련번호" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiTradeResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcOffiTradeBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiTradeHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiTradeBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcOffiTradeVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiTradeVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="단지" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="시군구" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:long"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSHRentResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcSHRentBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSHRentHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSHRentBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcSHRentVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcSHRentVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:decimal"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="계약면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="보증금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월세금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSTestResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSTestBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSTestHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSTestBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item" type="getRTMSTestVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSTestVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="대지면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="연면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="주택유형" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiTradeDevResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcOffiTradeDevBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiTradeDevHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiTradeDevBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcOffiTradeDevVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcOffiTradeDevVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="건축년도" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="단지" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물본번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명건물부번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명일련번호코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명지상지하코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="도로명코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동본번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동부번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동시군구코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동읍면동코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동지번코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="시군구" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="전용면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지번" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="층" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcLandTradeResponse">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" ref="header"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="body" type="getRTMSDataSvcLandTradeBody"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcLandTradeHeader">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcLandTradeBody">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="items">\r\n
+                        <xs:complexType>\r\n
+                            <xs:sequence>\r\n
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="item"
+                                            type="getRTMSDataSvcLandTradeVO"/>
+                                \r\n
+                            </xs:sequence>
+                            \r\n
+                        </xs:complexType>
+                        \r\n
+                    </xs:element>
+                    \r\n
+                    <xs:element minOccurs="0" name="numOfRows" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="pageNo" type="xs:int"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+            <xs:complexType name="getRTMSDataSvcLandTradeVO">\r\n
+                <xs:sequence>\r\n
+                    <xs:element minOccurs="0" name="거래금액" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="거래면적" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="구분" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="년" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="법정동" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="시군구" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="용도지역" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="월" type="xs:long"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="일" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지목" type="xs:string"/>
+                    \r\n
+                    <xs:element minOccurs="0" name="지역코드" type="xs:string"/>
+                    \r\n
+                </xs:sequence>
+                \r\n
+            </xs:complexType>
+            \r\n
+        </xs:schema>
+        \r\n
+    </grammars>
+    <resources base="http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc">
+        <resource path="/">
+            <resource path="getRTMSDataSvcAptRent">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcAptRentDev">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcAptTrade">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcAptTradeDev">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcLandTrade">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcNrgTrade">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcOffiRent">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcOffiRentDev">
+                <param name="LAWD_CD" style="template" type="xs:string"/>
+                <param name="DEAL_YMD" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcOffiTrade">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcOffiTradeDev">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcRHRent">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcRHRentDev">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcRHTrade">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcRHTradeDev">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcSHRent">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcSHTrade">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcSilvTrade">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSDataSvcSilvTradeDev">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getRTMSTest">
+                <method name="GET">
+                    <request>
+                        <param name="LAWD_CD" style="query" type="xs:string"/>
+                        <param name="DEAL_YMD" style="query" type="xs:string"/>
+                        <param name="pageNo" style="query" default="1" type="xs:int"/>
+                        <param name="numOfRows" style="query" default="10" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/xml"/>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+    </resources>
+</application>'

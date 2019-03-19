@@ -58,16 +58,44 @@ class Report(Base):
 class TradePrice(Base):
     __tablename__ = 'tradeprices'
     id = Column(Integer, primary_key=True, autoincrement=True)
+    yyyymm = Column(String(6))
     tradeprice = Column(Float)
-    yyyymm = Column(String(30))
+    build_year = Column(Integer)
+    trade_year = Column(Integer)
+    apt_name = Column(String(60))
+    trade_month = Column(Integer)
+    trade_days = Column(String(6))  # 1~10 , 11~20 , 21~31 ?
+    private_area = Column(Float)
+    region_code = Column(String(6))
+    floor = Column(Integer)
     timestamp = Column(String(30))
 
     def __repr__(self):
-        return '<Report %r>' % (self.email)
+        return '<TradePrice %r>' % (self.id)
 
-    def __init__(self, yyyymm, tradeprice, timestamp):
+    def __init__(self,
+                 yyyymm,
+                 trade_price,
+                 build_year,
+                 trade_year,
+                 apt_name,
+                 trade_month,
+                 trade_days,
+                 private_area,
+                 region_code,
+                 floor,
+                 timestamp):
         self.yyyymm = yyyymm
-        self.tradeprice = tradeprice
+        self.trade_price = trade_price
+        self.build_year = build_year
+        self.trade_year = trade_year
+        self.apt_name = apt_name
+        self.trade_month = trade_month
+        self.trade_days = trade_days
+        self.private_area = private_area
+        self.region_code = region_code
+        self.floor = floor
+
         self.timestamp = timestamp
 
 def db_data_initialize():
