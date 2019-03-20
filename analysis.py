@@ -8,6 +8,7 @@ from pandas.io.json import json_normalize
 from utilities import CF_Row
 import xml.etree.ElementTree as ET
 import requests
+import json    # or `import simplejson as json` if on Python < 2.6
 
 #api_key = 'Oh7DEmB%2FqCK%2BnQvU5VEpBpwmy7UHaZSUrvRl8LTlL0AuCaxTD5yFlaZUUTYQgUxwAUqweyWeFJF6zB3qCswM7w%3D%3D'
 api_key = 'Oh7DEmB%2FqCK%2BnQvU5VEpBpwmy7UHaZSUrvRl8LTlL0AuCaxTD5yFlaZUUTYQgUxwAUqweyWeFJF6zB3qCswM7w%3D%3D'
@@ -163,9 +164,16 @@ def make_flow(position_items, report_date, end_date):
     result_df = base_cashflows_df.groupby('DATE').sum()
 
     res = dict()
+    summary = dict()
+    summary['inflow_sum'] = result_df['IN'].sum()
+    summary['outflow_sum'] = result_df['OUT'].sum()
+    summary['net_sum'] = summary['inflow_sum'] - summary['outflow_sum']
+    res['summary'] = summary
     res['dates'] = result_df.index.tolist()
     res['inflows'] = result_df['IN'].tolist()
     res['outflows'] = result_df['OUT'].tolist()
+
+    print(res)
 
     return res
 
@@ -181,8 +189,8 @@ def make_summary(df):
     # 현재 평가를 다 더해야함( 우선은 book_value로 )
     res['asset_amount'] = float(df['trade_price'].sum())
 
-    #print(df[df['position_type']=='자가']['rent.deposit'].sum())
-    print(df.columns)
+    # print(df[df['position_type']=='자가']['rent.deposit'].sum())
+    # print(df.columns)
 
     # rent + loan -> sum
     rent_sum = float(df[df['position_type']=='자가']['rent.deposit'].sum())
@@ -262,10 +270,9 @@ def test_analysis():
                     "effective_date": "2018-10-11",
                     "maturity_date": "2018-10-11"
                 },
-                "loan_type": "없음",
+                "loan_type":"없음",
                 "loan": {
                     "amount": 10000,
-                    "type":"fixed",
                     "rate": 0.03,
                     "effective_date": "2018-10-11",
                     "maturity_date": "2018-10-11"
@@ -287,9 +294,9 @@ def test_analysis():
                     "maturity_date": "2018-10-11"
                 },
                 "loan_type": "없음",
+                "loan_type":"고정금리",
                 "loan": {
                     "amount": 3000,
-                    "type":"fixed",
                     "rate": 0.03,
                     "effective_date": "2018-10-11",
                     "maturity_date": "2018-10-11"
@@ -298,8 +305,6 @@ def test_analysis():
         ]
         }
     '''
-
-    import json    # or `import simplejson as json` if on Python < 2.6
 
     obj = json.loads(json_str)
     return position_analysis(obj['position_list'])
@@ -360,10 +365,7 @@ def test_trade_price_download():
 
 if __name__ == '__main__':
     init_db()
-    print(test_analysis())
-
-
-
+    print(json.dumps(test_analysis(),indent=4, sort_keys=True))
 
     # print ('------------------------test-------------------------')
     #

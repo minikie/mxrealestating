@@ -292,6 +292,7 @@ def get_report(report_token):
         abort(400, 'no report exist')
     else:
         report_data = json.loads(r.results)
+        print(report_data)
         return render_template('report.html', report_data=report_data)
 
 
