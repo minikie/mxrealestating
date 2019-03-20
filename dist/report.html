@@ -2,9 +2,182 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>MxReport</title>
+        <!-- Bootstrap Core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+
 </head>
 <body>
+<div class="container">
+    <div id="printArea">
+        <div class="row">
+            <div class="col-xl-6 col-md-6 col-sm-6 col-6 mb-3">
+                생성일 : {{ report_data.timestamp }}
+            </div>
+        </div>
+
+        <!-- Card Row -->
+        <div class="row">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-3 col-sm-6 col-6 mb-3">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">자산</div>
+                                <div
+                                        class="h5 mb-0 font-weight-bold text-gray-800"
+                                >{{ report_data.summary.asset_amount }}
+                                </div>
+                                <div>만원</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-3 col-sm-6 col-6 mb-3">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">부채</div>
+                                <div
+                                        class="h5 mb-0 font-weight-bold text-gray-800"
+                                >{{ report_data.summary.liability_amount }}
+                                </div>
+                                <div>만원</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-3 col-sm-6 col-6 mb-3">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">순자산</div>
+                                <div
+                                        class="h5 mb-0 font-weight-bold text-gray-800"
+                                >{{ report_data.summary.capital_amount }}
+                                </div>
+                                     <div>만원</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-3 col-sm-6 col-6 mb-3">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">총손익</div>
+                                <div
+                                        class="h5 mb-0 font-weight-bold text-gray-800"
+                                >{{ report_data.summary.profit_amount }}
+                                </div>
+                                     <div>만원</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flow Row -->
+        <div class="row">
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-12 mb-3">
+                <div class="card shadow">
+                    <!-- Card Header - Dropdown -->
+                    <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                    >
+                        <h6 class="m-0 font-weight-bold text-primary">현금흐름</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <!-- <line-chart :chartdata="chartData"></line-chart> -->
+                            <!-- <bar-example></bar-example> -->
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Comment Row -->
+        <div class="row">
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-3">
+                <!-- Approach -->
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">메모</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat
+                            and poor page performance. Custom CSS classes are used to create custom components and
+                            custom utility classes.
+                        </p>
+                        <p class="mb-0">
+                            Before working with this theme, you should become familiar with the Bootstrap
+                            framework, especially the utility classes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- <div class="row">
+          <v-container>
+              <v-layout row wrap>
+                  <v-flex xs12 mb6>
+                      <v-text-field label="Email" v-model="userinfo.email"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 mb6>
+                      <v-btn color="primary" @click='store_position()'>Save
+
+                      </v-btn>
+                      <v-btn color="primary" @click='printDiv()'>Print
+
+                      </v-btn>
+                  </v-flex>
+              </v-layout>
+          </v-container>
+
+        </div>-->
+    </div>
+</div>
+
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>
