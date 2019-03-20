@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from pandas import util
-
 from flask import request, render_template, jsonify, send_from_directory
 from flask import Flask, url_for, redirect, session, make_response, abort
 import os, json, datetime
