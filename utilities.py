@@ -109,6 +109,48 @@ def position_info_from_naver(url):
     return res
 
 
+# hscpNo : '1347',
+# 							ptpNo : '5',
+# 							bildNo : '225825',
+# 							priceStatsCount : '',
+# 							lat:'37.562479',
+# 							lng:'126.859997',
+# 							tradTpCd : 'A1',
+# 							tradTpNm : '매매',
+# 							rletTpCd : 'APT',
+# 							rletTpNm : '아파트',
+# 							atclNo : '1906730376',
+# 							atclNm : '가양6단지 613동',
+# 							cortarNo : '1150010400',
+# 							cortarNm : '서울시 강서구 가양동',
+# 							dealAmt : '60000',
+# 							wrntAmt : '0',
+# 							rentAmt : '0',
+# 							addr : '서울시 강서구 가양동 1485',
+# 							spc : '75.89',
+# 							dongNm : '613',
+# 							prc : '60,000',
+# 							prcBillion : '6억',
+# 							notfSeq : '',
+# 							isFavoriteItem : 'false',
+# 							rltrId : 'leeck5areum',
+# 							rltrTelNo : '02-3663-5333',
+# 							rltrCphNo : '010-6617-9927',
+# 							addr : '서울시 강서구 가양동 1485',
+# 							isFromNaver : 'N',
+# 							groundPlanImage : $.parseJSON('[{}]'),
+# 							rmNo : '804',
+# 							mapLocaIndcYn : 'Y',
+#                             prcBillionRangeInfo : '6억',
+# 							bssPrcs : bssPrcs,
+# 							realPriceRecentYmInfo : $.parseJSON('{"recentRealPriceYm":"201903","recentRealPriceYmFmt1":"2019.03","recentRealPriceYmFmt2":"2019년 03월"}'),
+#                             realPricePtpInfo : $.parseJSON('{"49.5":"2","39.6":"1","58.65":"5"}'),
+# 							realPricePtpNmListStrInfo : $.parseJSON('{"49.5":"64㎡의 실거래가","39.6":"51㎡의 실거래가","58.65":"74A㎡, 75B㎡, 77C㎡의 실거래가"}'),
+# 							realPriceExistYn : 'Y',
+# 							ptpInfo : $.parseJSON('{"1":{"ptpNo":"1","ptpNm":"51","splySpc":"51.96","exclsSpc":"39.6","splySpcPyeong0WithUnit":"15평","splySpcPyeong2WithUnit":"15.71평","exclsSpcPyeong2WithUnit":"12평","exclsRate":"76","ptybyTotHsehCnt":"432","hscpTypeCd":"A01","ptpOrder":0,"ptpNmWithUnit":"51㎡","splySpcWithUnit":"51.96㎡","exclsSpcWithUnit":"39.6㎡"},"2":{"ptpNo":"2","ptpNm":"64","splySpc":"64.98","exclsSpc":"49.5","splySpcPyeong0WithUnit":"19평","splySpcPyeong2WithUnit":"19.65평","exclsSpcPyeong2WithUnit":"15평","exclsRate":"76","ptybyTotHsehCnt":"594","hscpTypeCd":"A01","ptpOrder":1,"ptpNmWithUnit":"64㎡","splySpcWithUnit":"64.98㎡","exclsSpcWithUnit":"49.5㎡"},"3":{"ptpNo":"3","ptpNm":"74A","splySpc":"74.58","exclsSpc":"58.65","splySpcPyeong0WithUnit":"22A평","splySpcPyeong2WithUnit":"22.56평","exclsSpcPyeong2WithUnit":"17.77평","exclsRate":"79","ptybyTotHsehCnt":"90","hscpTypeCd":"A01","ptpOrder":2,"ptpNmWithUnit":"74A㎡","splySpcWithUnit":"74.58㎡","exclsSpcWithUnit":"58.65㎡"},"4":{"ptpNo":"4","ptpNm":"77C","splySpc":"77.37","exclsSpc":"58.65","splySpcPyeong0WithUnit":"23C평","splySpcPyeong2WithUnit":"23.4평","exclsSpcPyeong2WithUnit":"17.77평","exclsRate":"76","ptybyTotHsehCnt":"120","hscpTypeCd":"A01","ptpOrder":4,"ptpNmWithUnit":"77C㎡","splySpcWithUnit":"77.37㎡","exclsSpcWithUnit":"58.65㎡"},"5":{"ptpNo":"5","ptpNm":"75B","splySpc":"75.89","exclsSpc":"58.65","splySpcPyeong0WithUnit":"22B평","splySpcPyeong2WithUnit":"22.95평","exclsSpcPyeong2WithUnit":"17.77평","exclsRate":"77","ptybyTotHsehCnt":"240","hscpTypeCd":"A01","ptpOrder":3,"ptpNmWithUnit":"75B㎡","splySpcWithUnit":"75.89㎡","exclsSpcWithUnit":"58.65㎡"}}'),
+# 							zoom : '11',
+# 							prcCpId : 'kbstar'
+
 def test():
     # http://www.macquarie.com/kr/kr/acrobat/m_nps_reit_mltm_quarterly_investment_report_300608.pdf
     current_value = 0
@@ -201,4 +243,8 @@ def calculate_price(position):
 # import json
 # print json.loads(json_string)
 if __name__ == '__main__':
-    print(position_info_from_naver('https://m.land.naver.com/article/info/1905842490'))
+    # print(position_info_from_naver('https://m.land.naver.com/article/info/1905842490'))
+    # http://www.juso.go.kr/addrlink/addressBuildDevNew.do?menu=rdnm
+    pass
+
+

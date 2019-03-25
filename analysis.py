@@ -8,7 +8,7 @@ from pandas.io.json import json_normalize
 from utilities import CF_Row
 import xml.etree.ElementTree as ET
 import requests
-import json    # or `import simplejson as json` if on Python < 2.6
+import json # or `import simplejson as json` if on Python < 2.6
 
 #api_key = 'Oh7DEmB%2FqCK%2BnQvU5VEpBpwmy7UHaZSUrvRl8LTlL0AuCaxTD5yFlaZUUTYQgUxwAUqweyWeFJF6zB3qCswM7w%3D%3D'
 api_key = 'Oh7DEmB%2FqCK%2BnQvU5VEpBpwmy7UHaZSUrvRl8LTlL0AuCaxTD5yFlaZUUTYQgUxwAUqweyWeFJF6zB3qCswM7w%3D%3D'
