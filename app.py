@@ -294,12 +294,20 @@ def get_report(report_token):
         return render_template('report.html', report_data=report_data)
 
 
-@app.route('/apt_list', methods=['GET'])
-def get_apt_list():
-    pass
+@app.route('/get_address_list', methods=['POST'])
+def get_address_list():
+    res = {}
+    # post
+    request_json = request.json
 
+    print('get_address_list')
+    if request.method == 'POST':
+        print('post')
+        print(request.json)
+        keyword = request_json['keyword']
+        res = utilities.get_address_list(keyword)
 
-
+    return jsonify(res)
 
 
 # --------------------------------------------------------------------------------------------------

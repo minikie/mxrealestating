@@ -109,6 +109,20 @@ def position_info_from_naver(url):
     return res
 
 
+def get_address_list(keyword):
+    currentPage = 1
+    countPerPage = 10
+    resultType = "json"
+    confmKey = "U01TX0FVVEgyMDE5MDMyNTE3NDIwNjEwODYwMTk="
+
+    url = 'http://www.juso.go.kr/addrlink/addrLinkApi.do'
+    parameters = '?' + 'currentPage=1&countPerPage=100&resultType=json&confmKey=U01TX0FVVEgyMDE5MDMyNTE3NDIwNjEwODYwMTk=&keyword=' + keyword
+
+    res = requests.get(url + parameters)
+
+    print(res.text)
+    return res.json()
+
 # hscpNo : '1347',
 # 							ptpNo : '5',
 # 							bildNo : '225825',
