@@ -62,6 +62,11 @@ class TradePrice(Base):
     tradeprice = Column(Float)
     build_year = Column(Integer)
     trade_year = Column(Integer)
+    rn = Column(String(60))
+    buldMnnm = Column(Integer)
+    buldSlno = Column(Integer)
+    rnMgtSn1 = Column(Integer)
+    rnMgtSn2 = Column(Integer)
     apt_name = Column(String(60))
     trade_month = Column(Integer)
     trade_days = Column(String(6))  # 1~10 , 11~20 , 21~31 ?
@@ -78,6 +83,11 @@ class TradePrice(Base):
                  trade_price,
                  build_year,
                  trade_year,
+                 rn,
+                 buldMnnm,
+                 buldSlno,
+                 rnMgtSn1,
+                 rnMgtSn2,
                  apt_name,
                  trade_month,
                  trade_days,
@@ -89,6 +99,11 @@ class TradePrice(Base):
         self.trade_price = trade_price
         self.build_year = build_year
         self.trade_year = trade_year
+        self.rn = rn
+        self.buldMnnm = buldMnnm
+        self.buldSlno = buldSlno
+        self.rnMgtSn1 = rnMgtSn1
+        self.rnMgtSn2 = rnMgtSn2
         self.apt_name = apt_name
         self.trade_month = trade_month
         self.trade_days = trade_days

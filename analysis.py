@@ -9,6 +9,7 @@ from utilities import CF_Row
 import xml.etree.ElementTree as ET
 import requests
 import json # or `import simplejson as json` if on Python < 2.6
+from sqlalchemy import desc
 
 #api_key = 'Oh7DEmB%2FqCK%2BnQvU5VEpBpwmy7UHaZSUrvRl8LTlL0AuCaxTD5yFlaZUUTYQgUxwAUqweyWeFJF6zB3qCswM7w%3D%3D'
 api_key = 'Oh7DEmB%2FqCK%2BnQvU5VEpBpwmy7UHaZSUrvRl8LTlL0AuCaxTD5yFlaZUUTYQgUxwAUqweyWeFJF6zB3qCswM7w%3D%3D'
@@ -96,10 +97,23 @@ def download_trade_price(region_code, yyyymm):
     # 지워지나..?
     TradePrice.query.filter(TradePrice.yyyymm == yyyymm).delete()
 
+    ## rn ## <도로명>사직로8길</도로명>
+    ## buldMnnm ## <도로명건물본번호코드>00004</도로명건물본번호코드>
+    ## buldSlno ## <도로명건물부번호코드>00000</도로명건물부번호코드>
+    ## rnMgtSn1 ## <도로명시군구코드>11110</도로명시군구코드>
+    # <도로명일련번호코드>03</도로명일련번호코드>
+    # <도로명지상지하코드>0</도로명지상지하코드>
+    ## rnMgtSn2 ## <도로명코드>4100135</도로명코드>
+
     for item in root.findall('body/items/item'):
         trade_price = float(item.find('거래금액').text.replace(',', '').strip())
         build_year = int(item.find('건축년도').text)
         trade_year = int(item.find('년').text)
+        rn = item.find('도로명').text
+        buldMnnm = int(item.find('도로명건물본번호코드').text)
+        buldSlno = int(item.find('도로명건물부번호코드').text)
+        rnMgtSn1 = int(item.find('도로명시군구코드').text)
+        rnMgtSn2 = int(item.find('도로명코드').text)
         apt_name = item.find('아파트').text
         trade_month = int(item.find('월').text)
         trade_days = item.find('일').text # 1~10 , 11~20 , 21~31 ?
@@ -107,12 +121,20 @@ def download_trade_price(region_code, yyyymm):
         region_code = item.find('지역코드').text
         floor = int(item.find('층').text)
 
-        tp = TradePrice(yyyymm, trade_price,build_year,trade_year,apt_name,
-                        trade_month,trade_days,private_area,region_code,floor,timestamp)
+        tp = TradePrice(yyyymm, trade_price, build_year, trade_year, rn, buldMnnm, buldSlno, rnMgtSn1, rnMgtSn2, apt_name,
+                        trade_month, trade_days, private_area, region_code, floor, timestamp)
 
         db_session.add(tp)
 
     db_session.commit()
+
+
+def check_tradeprice_downloaded(yyyymm, region_code):
+    tp = TradePrice.query.filter(TradePrice.yyyymm == yyyymm and
+                                 TradePrice.region_code == region_code).first()
+
+    if tp is None:
+        download_trade_price(yyyymm, region_code)
 
 
 # 최신 데이터..?
@@ -124,25 +146,36 @@ def append_trade_price(df, date):
 
     for i in df.index:
         region_code = df.at[i, 'region_code']
+        rnMgtSn = df.at[i, 'rnMgtSn']
         private_area = df.at[i, 'private_area']
-
+        buldMnnm = df.at[i, 'buldMnnm'] # 건물 본번
+        buldSlno = df.at[i, 'buldSlno'] # 건물 부번
         # floor = df.at[i, 'floor']
 
-        tp = TradePrice.query.filter(TradePrice.yyyymm == yyyymm and
-                                     TradePrice.region_code == region_code and
-                                     TradePrice.private_area.between(private_area-0.5, private_area+0.5)).first()
+        # check is downloaded
+        check_tradeprice_downloaded(yyyymm, region_code)
+
+        tp = TradePrice.query.filter(TradePrice.rnMgtSn1 == rnMgtSn[:5] and
+                                     TradePrice.rnMgtSn2 == rnMgtSn[5:] and
+                                     #TradePrice.yyyymm == yyyymm and
+                                     TradePrice.buldMnnm == buldMnnm and
+                                     TradePrice.buldSlno == buldSlno and
+                                     TradePrice.private_area.between(private_area-0.5, private_area+0.5)).order_by(desc(TradePrice.yyyymm)).first()
 
         # tp = TradePrice.query.filter(TradePrice.yyyymm == yyyymm and
         #                              TradePrice.region_code == region_code,
         #                              TradePrice.private_area.between(private_area-0.5, private_area+0.5)).first()
 
+        tradeprice = 0
+
         if tp is None:
-            download_trade_price(region_code, yyyymm)
+            tradeprice = tp.tradeprice
+            # download_trade_price(region_code, yyyymm) # 이건 하루에 한번 배치 다운로드하는 형태로 구축함.
 
         # 어떻게 가져올것인가..? 평형 , 거래 날짜 등.
-        trades = TradePrice.query.filter(TradePrice.yyyymm == yyyymm and TradePrice.region_code)
+        # trades = TradePrice.query.filter(TradePrice.yyyymm == yyyymm and TradePrice.region_code)
 
-        df.at[i, 'trade_price'] = 10000
+        df.at[i, 'trade_price'] = tradeprice
 
 
 def make_flow(position_items, report_date, end_date):
@@ -332,13 +365,14 @@ def test_trade_price_download():
     ## trade_price ## <거래금액> 82,500</거래금액>
     ## build_year ## <건축년도>2008</건축년도>
     ## trade_year ## <년>2015</년>
-    # <도로명>사직로8길</도로명>
-    # <도로명건물본번호코드>00004</도로명건물본번호코드>
-    # <도로명건물부번호코드>00000</도로명건물부번호코드>
-    # <도로명시군구코드>11110</도로명시군구코드>
+    ## rn ## <도로명>사직로8길</도로명>
+    ## buldMnnm ## <도로명건물본번호코드>00004</도로명건물본번호코드>
+    ## buldSlno ## <도로명건물부번호코드>00000</도로명건물부번호코드>
+    ## rnMgtSn1 ## <도로명시군구코드>11110</도로명시군구코드>
     # <도로명일련번호코드>03</도로명일련번호코드>
     # <도로명지상지하코드>0</도로명지상지하코드>
-    # <도로명코드>4100135</도로명코드>
+    ## rnMgtSn2 ## <도로명코드>4100135</도로명코드>
+
     # <법정동> 사직동</법정동>
     # <법정동본번코드>0009</법정동본번코드>
     # <법정동부번코드>0000</법정동부번코드>

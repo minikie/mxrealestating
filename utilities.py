@@ -123,6 +123,13 @@ def get_address_list(keyword):
     print(res.text)
     return res.json()
 
+
+def evaluate_position(position):
+    # apt 만 우선 처리
+    pass
+
+
+
 # hscpNo : '1347',
 # 							ptpNo : '5',
 # 							bildNo : '225825',
